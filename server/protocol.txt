@@ -1,0 +1,37 @@
+Network protocol for client/server
+
+Everything is sent as strings, with spaces in between values. The first value is the message type, followed by
+parameters specific to that type.
+
+Logging in:
+	login <username> <password>
+	- This is sent from the client to the server.
+	- The username and password should not contain any spaces.
+	- The server should respond 'OK' if the combination matches, or 'Fail' otherwise.
+
+	- An example: login student 12345
+		- username: student, password: 12345
+		- response: OK (since in this example the username and password is correct)
+
+Retrieving level info:
+	levelinfo <username>
+	- This is sent from the client to the server.
+	- The username should not contain any spaces.
+	- The server should respond with a space-separated list of scores for each level. If the username is
+		invalid, the server will return a blank string.
+
+	- An example: levelinfo student
+		- username: student
+		- response: 300 400 0 0
+			- first level: 300, second: 400, third and fourth: 0
+
+A level has been completed:
+	level <username> <level> <score>
+	- This is sent from the client to the server.
+	- The username should not contain any spaces.
+	- The server should respond with an 'OK' or 'Fail', depending on the success of the SQL server interface.
+
+	- An example: level student 1 450
+		- username: student
+		- level ID: 1
+		- score: 450
